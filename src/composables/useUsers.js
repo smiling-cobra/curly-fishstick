@@ -1,0 +1,35 @@
+import { ref, onMounted } from 'vue';
+
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
+export const useUsers = () => {
+  const users = ref([]);
+  const loading = ref(false);
+  const error = ref(null);
+
+  const fetchUsers = async () => {
+    loading.value = true;
+    error.value = null;
+    try {
+      const response = await fetch(`${baseUrl}/users`);
+      if (!response.ok) throw new Error('Failed to fetch posts');
+      users.value = await response.json();
+    } catch (e) {
+      error.value = e.message;
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  // Optionally, auto-fetch posts on mount
+  onMounted(() => {
+    fetchPosts();
+  });
+
+  return {
+    users,
+    loading,
+    error,
+    fetchUsers,
+  };
+}
