@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue';
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const usePosts = () => {
   const posts = ref([]);
@@ -11,7 +11,7 @@ export const usePosts = () => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await fetch(baseUrl);
+      const response = await fetch(`${baseUrl}/posts`);
       if (!response.ok) throw new Error('Failed to fetch posts');
       posts.value = await response.json();
     } catch (e) {
@@ -23,7 +23,7 @@ export const usePosts = () => {
 
   const createPost = async (newPost) => {
     try {
-      const response = await fetch(baseUrl, getHeaders('POST', newPost));
+      const response = await fetch(`${baseUrl}/posts`, getHeaders('POST', newPost));
       if (!response.ok) throw new Error('Failed to create post');
       const data = await response.json();
 

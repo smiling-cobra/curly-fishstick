@@ -29,8 +29,8 @@
   </template>
   
   <script>
-  import { usePosts } from '../composables/usePosts';
-  import PostForm from './PostForm.vue';
+  import { usePosts } from '@/composables/usePosts';
+  import PostForm from '@/components/PostForm.vue';
   import { useRouter } from 'vue-router';
   
   export default {

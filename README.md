@@ -13,3 +13,7 @@ This is a post management application written in Vue.js 3. It allow users to CRU
 - CRUD operations are encapsulated in usePosts & useUsers.
 
 - Composables - usePosts & useUsers are being used in order to manage data fetching & state, making them reusable.
+
+## Issues
+
+- Issue with the tailwind CLI in version of 4.0.0. Had to use version 3.3.

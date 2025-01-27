@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue';
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const useUsers = () => {
   const users = ref([]);
