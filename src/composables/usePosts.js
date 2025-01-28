@@ -63,11 +63,6 @@ export const usePosts = () => {
     }
   }
 
-  // Optionally, auto-fetch posts on mount
-  onMounted(() => {
-    fetchPosts();
-  });
-
   return {
     posts,
     loading,

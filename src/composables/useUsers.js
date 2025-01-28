@@ -21,11 +21,6 @@ export const useUsers = () => {
     }
   }
 
-  // Optionally, auto-fetch posts on mount
-  onMounted(() => {
-    fetchPosts();
-  });
-
   return {
     users,
     loading,
