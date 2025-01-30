@@ -1,11 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import PostList from '@/components/PostList.vue';
-import PostForm from '@/components/PostForm.vue';
 
-const routes = [
-  { path: '/', name: 'Home', component: PostList },
-  { path: '/posts/:id', name: 'PostForm', component: PostForm },
-];
+const routes = [{ path: '/', name: 'Home', component: PostList }];
 
 const router = createRouter({
   history: createWebHistory(),

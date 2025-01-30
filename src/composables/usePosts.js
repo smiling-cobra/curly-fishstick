@@ -53,7 +53,7 @@ export const usePosts = () => {
 
   const deletePost = async (id) => {
     try {
-      const res = await fetch(`${baseUrl}/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${baseUrl}/posts/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to delete post');
 
       // Filter out the deleted post from local state

@@ -8,6 +8,7 @@ export const usePostsAndUsers = () => {
     loading: postsLoading,
     error: postsError,
     fetchPosts,
+    deletePost
   } = usePosts();
 
   const {
@@ -47,5 +48,6 @@ export const usePostsAndUsers = () => {
     fetchUsers,
     postsError,
     usersError,
+    deletePost,
   };
 };
