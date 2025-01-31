@@ -20,6 +20,9 @@ This is a post management application written in Vue.js 3. It allow users to CRU
 
 - I decided to combine usePosts and useUsers composables because I need to reuse that data in multiple places. Since the project is small I think global app state is an overhead.
 
+- Later on I decided to get rid of vue-router since in my opinion implementing post form would way cheaper and straightforward via modal window. Therefore, no page transitions required.
+
+
 ## Issues
 
 - Issue with the tailwind CLI in version of 4.0.0. Had to use version 3.3.

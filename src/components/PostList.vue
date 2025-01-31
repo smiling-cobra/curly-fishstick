@@ -1,5 +1,6 @@
 <template>
   <div class="p-4">
+    <!-- Search for post & Create post -->
     <div class="flex justify-between items-center mb-4">
       <input v-model="searchQuery" type="text" placeholder="Search for post..."
         class="border px-3 py-2 rounded w-full" />
@@ -8,9 +9,11 @@
       </button>
     </div>
 
+    <!-- Application statuses -->
     <div v-if="combinedError" class="text-red-600">Error: {{ combinedError }}</div>
     <div v-if="isLoading" class="text-blue-600">Loading...</div>
 
+    <!-- Post list -->
     <table v-if="!combinedError && !isLoading" class="w-full border-collapse border border-gray-300 table-fixed">
       <thead>
         <tr class="bg-gray-300">
@@ -39,7 +42,7 @@
           </td>
           <td class="border px-4 py-2 relative">
             <button class="p-2" @click.stop="toggleMenu(post.id)">⋮</button>
-
+            <!-- Action menu -->
             <div v-if="activeMenu === post.id" class="absolute right-0 bg-white shadow-md p-2 rounded-md z-50"
               @mouseleave="closeMenu" @click.stop>
               <button class="block text-blue-500 px-4 py-2 hover:bg-gray-100" @click="editPost(post)">
@@ -54,39 +57,42 @@
       </tbody>
     </table>
 
+    <!-- Post modal window -->
     <div v-if="modalOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-      <PostEditor :post="selectedPost" :authors="authors" @save="savePost" @close="closeModal" />
+      <PostDetails :post="selectedPost" :authors="authors" @save="savePost" @close="closeModal" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import PostEditor from "@/pages/PostEditor.vue";
+import PostDetails from "@/components/PostDetails.vue";
 import { usePostsAndUsers } from "@/composables/usePostsAndUsers";
 
-const { isLoading, deletePost, mergedPosts, combinedError } = usePostsAndUsers();
+const { isLoading, deletePost, mergedPosts, combinedError, users } = usePostsAndUsers();
 
+const authors = ref(users);
 const searchQuery = ref("");
 const selectAll = ref(false);
 const activeMenu = ref(null);
-const selectedPosts = ref([]);
 const modalOpen = ref(false);
 const isEditing = ref(false);
+const selectedPosts = ref([]);
 const selectedPost = ref(null);
-
-// Sample authors
-const authors = ref([
-  { id: 1, name: "John Doe" },
-  { id: 2, name: "Jane Smith" },
-  { id: 3, name: "Alice Johnson" },
-]);
 
 const filteredPosts = computed(() =>
   mergedPosts.value.filter((post) =>
     post.title.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 );
+
+const toggleSelecAll = () => {
+  if (selectAll.value) {
+    selectedPosts.value = filteredPosts.value.map((post) => post.id);
+  } else {
+    selectedPosts.value = [];
+  }
+};
 
 const openCreatePost = () => {
   isEditing.value = false;

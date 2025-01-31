@@ -41,6 +41,7 @@ export const usePostsAndUsers = () => {
   });
 
   return {
+    users: usersRef,
     mergedPosts,
     isLoading,
     combinedError,
