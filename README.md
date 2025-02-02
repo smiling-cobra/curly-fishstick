@@ -8,7 +8,7 @@ This is a post management application written in Vue.js 3. It allow users to CRU
 
 ## Explanations
 
-- I took JS instead of TS in a sake of simplicity.
+- I choose JS instead of TS in a sake of simplicity.
 
 - I decided to use vanilla css over tailwind in order to keep it cheap & simple.
 
@@ -22,11 +22,13 @@ This is a post management application written in Vue.js 3. It allow users to CRU
 
 - Later on I decided to get rid of vue-router since in my opinion implementing post form would way cheaper and straightforward via modal window. Therefore, no page transitions required.
 
+- I've tried to utilize [vue-quill](https://vueup.github.io/vue-quill/#demo) but had to get rid of it eventually because it did not work and I was short in time.
+
 
 ## Issues
 
 - Issue with the tailwind CLI in version of 4.0.0. Had to use version 3.3.
-
+- Issues with usage of vue-quill.
 
 # Frontend Assessment Task
 
