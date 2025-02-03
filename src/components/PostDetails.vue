@@ -18,15 +18,15 @@
       <!-- Author Dropdown -->
       <div>
         <label for="author" class="block text-sm font-medium text-gray-700">Author</label>
-        <select id="author" v-model="postData.author" class="mt-1 block w-full p-2 border rounded-md">
+        <select id="author" v-model="postData.userId" class="mt-1 block w-full p-2 border rounded-md">
           <option value="">Select an author</option>
-          <option v-for="author in authors" :key="author.id" :value="author.name">
+          <option v-for="author in authors" :key="author.id" :value="author.id">
             {{ author.name }}
           </option>
         </select>
       </div>
 
-      <!-- Rich Text Editor -->
+      <!-- Text Editor -->
       <div>
         <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
         <textarea id="body" v-model="postData.body" rows="10" class="mt-1 block w-full p-2 border rounded-md"
@@ -34,7 +34,7 @@
       </div>
     </form>
 
-    <!-- Footer with Buttons -->
+    <!-- Modal Footer -->
     <div class="flex justify-end p-4 border-t">
       <button @click="$emit('close')" class="px-4 py-2 bg-gray-200 rounded-md mr-2">Close</button>
       <button @click="savePost" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save Changes</button>
@@ -43,27 +43,30 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, watch } from "vue";
+import { ref, watch } from "vue";
+
+const postData = ref({});
 
 const props = defineProps({
-  post: Object, // Receives a post object (for editing) or empty object (for creating)
-  authors: Array, // List of authors
+  post: Object,
+  authors: Array,
 });
 
 const emit = defineEmits(["save", "close"]);
-
-const postData = ref({});
 
 // Sync form when switching between edit & create modes
 watch(
   () => props.post,
   (newPost) => {
     postData.value = { ...newPost };
+    // If creating a new post - initialize userId with a default value
+    if (!newPost.userId) {
+      postData.value.userId = "";
+    }
   },
   { immediate: true, deep: true }
 );
 
-// Save post and emit event
 const savePost = () => {
   emit("save", postData.value);
 };

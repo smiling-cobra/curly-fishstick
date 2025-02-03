@@ -6,89 +6,25 @@ This is a post management application written in Vue.js 3. It allow users to CRU
 
 - Node 20.18.1 is required.
 
-## Explanations
+## Some explanations
 
 - I choose JS instead of TS in a sake of simplicity.
 
-- I decided to use vanilla css over tailwind in order to keep it cheap & simple.
+- I decided to use tailwind in order to move faster.
 
-- I decided to use vue router in the sake of better organisation. However, it could've been built on a single page.
+- I created data fetching layer using axios. I decided to use specifically axios because it's more convenient - automatically transforms JSON responses and simplifies error handling. However, buil-in fetch could perfectly fit instead but will require a bit more code.
 
-- CRUD operations are encapsulated in usePosts & useUsers.
+- Since JSON placeholder API is partially imitation real API behavior, I had to use vuex & vuex-persistedstate in order to be able to persist and manipulate data properly. I've created 2 separate
 
-- Composables - usePosts & useUsers are being used in order to manage data fetching & state, making them reusable.
+- I decided to combine posts and partially users into mergedPosts in order to avoid data transformation down the line, have it centralized and reusable. I admit that it's not the best idea eventually, since it creates tight data coupling (view is tightly coupled to both modules). But I think it's acceptable in the context of a case study.
 
-- I decided to combine usePosts and useUsers composables because I need to reuse that data in multiple places. Since the project is small I think global app state is an overhead.
-
-- Later on I decided to get rid of vue-router since in my opinion implementing post form would way cheaper and straightforward via modal window. Therefore, no page transitions required.
-
-- I've tried to utilize [vue-quill](https://vueup.github.io/vue-quill/#demo) but had to get rid of it eventually because it did not work and I was short in time.
-
+- I've tried to utilize [vue-quill](https://vueup.github.io/vue-quill/#demo) for rich text functionality, but had to get rid of it eventually because it did not work and I was short on time to figure out why.
 
 ## Issues
 
 - Issue with the tailwind CLI in version of 4.0.0. Had to use version 3.3.
-- Issues with usage of vue-quill.
+- Issues with usage of vue-quill package.
 
-# Frontend Assessment Task
+## Notes
 
-Thank you for taking the time to complete this assessment task. Your evaluation will be a crucial part of the hiring process.
-
-## Objective
-
-Create a post management application using Vue.js 3 composition API and Vite. The application should allow users to read, create, delete, and update posts using the JSON placeholder API.
-
-### Requirements:
-
-- Use Vue.js 3 composition API and Vite for building the application
-- Implement CRUD functionality for posts
-- Use JSON placeholder API for data fetching and manipulation
-- Choose between Tailwind, UnoCSS, or Vanilla CSS for styling components
-
-Note: You are free to use any additional libraries or tools that you see fit to accomplish the task.
-
-### Deliverables:
-
-- Source code of the application
-- Hosted environment on GitHub Pages, Netlify, or Vercel
-    - CodeSandbox, Gitpod, or Stackblitz is also acceptable
-- Brief explanation of the design decisions and additional technologies used
-
-Note: Please provide the URL to the GitHub repository containing your Vue.js application code as well as the hosted environment of your choice. Include relevant documentation or instructions on how to run the application locally if needed.
-
-### Evaluation Criteria:
-
-- Overall functionality and user experience of the application
-- Code quality and organization
-- Use of Vue.js 3 composition API
-- Implementation of CRUD functionality
-- Use of chosen styling framework or plain Vanilla CSS
-
-### Bonus Points:
-
-- Implementation of form validation
-- Accessibility features
-- Write end-to-end tests for the application
-
-### API Endpoints
-
-* GET `/posts`
-	* Gets list of 100 posts
-* GET `/posts/{id}`
-	*  Gets a single post
-* POST `/posts`
-	* Adds a new post
-* PUT `/posts/{id}`
-	* Updates an existing post
-* DELETE `/posts/{id}`
-	* Deletes a post
-* GET `/users`
-	* Gets a list of 10 users 	
-
-The Rest API endpoint is provided by [JSON Placeholder](https://jsonplaceholder.typicode.com/).
-
----
-
-We understand time constraints and welcome any shortcuts you may need to take. In the spirit of transparency, please include a section outlining what you would have done differently with more time, noting any known issues or areas for improvement.
-
-Good luck!
+If I would have more time then I would add form validation, tests and accessibility features (bonus points). I would fix update of newly created posts (now it fails with 500 being return). Also, I would add pagination, confirmation windows (for all CRUD operations), notifications, maybe sorting, some kind of multiple posts management (multiple posts removal, for example).
